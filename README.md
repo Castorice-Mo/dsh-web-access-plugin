@@ -273,6 +273,7 @@ web-access/
 ├── PLUG.md             # 插件契约：工具、接口、挂载点、必须保持的不变量
 ├── agents/openai.yaml  # 供 OpenAI 兼容 Agent 宿主识别的能力描述
 ├── cordis.patch.yml    # bundle 补丁：插入一条 Host row
+├── quick_validate.py   # 清单与契约校验（开发用，不随包分发）
 ├── LICENSE             # MIT
 └── package.json        # 声明 dsh.bundle.patch 与 dsh.client
 ```
@@ -280,6 +281,16 @@ web-access/
 ## 开发
 
 改动前先读 [PLUG.md](PLUG.md)：其中 §8 列出了**必须保持的不变量**，它们对应本仓库已修复过的真实故障（`type: null` 拒收、`ctx.web` 提供者歧义、静默采用无关结果等）。
+
+每次改完跑一遍清单校验（纯标准库，无第三方依赖）：
+
+```bash
+python quick_validate.py
+```
+
+它做 33 项检查：`files`/`exports` 声明的路径是否真实存在、补丁行名是否与包名一致、工具 `parameters` 是否仍为对象根 JSON Schema、配置默认值是否与 README 表格对齐、`agents/openai.yaml` 里的工具名是否真的注册过、文档是否混入个人绝对路径、LICENSE 是否与 `package.json` 一致。
+
+> 校验器的负向能力已实测：人为注入「清单指向不存在的文件」「`parameters` 丢 `type`」「README 漏掉默认值」三类回归，三项全部 FAIL 且退出码为 1。
 
 改完 Host 代码后若行为仍是旧的，需重启 Harness——仅靠热更新不保证换到新一代模块。
 
