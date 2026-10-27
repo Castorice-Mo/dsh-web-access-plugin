@@ -1,0 +1,49 @@
+name: ci
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    name: validate (${{ matrix.os }})
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    defaults:
+      run:
+        shell: bash
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      # Manifest, patch, tool schema and documentation drift.
+      - name: Validate manifest and contract
+        run: python quick_validate.py
+
+      # Runtime files must at least parse; they are plain ESM with no build step.
+      - name: Syntax check JavaScript
+        run: |
+          set -euo pipefail
+          for file in index.js client.js lib/*.js; do
+            node --check "$file"
+            echo "ok  $file"
+          done
+
+      - name: Check package.json parses
+        run: node -e "JSON.parse(require('fs').readFileSync('package.json','utf8')); console.log('package.json ok')"

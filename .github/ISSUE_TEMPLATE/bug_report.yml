@@ -1,0 +1,81 @@
+name: Bug 报告
+description: 报告与文档不符或直接失败的行为
+title: "[bug] "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        感谢反馈。请尽量附上**真实输出**——本项目的多数问题能靠工具返回原文直接定位。
+        安全问题请**不要**在这里提交，见 [SECURITY.md](../SECURITY.md)。
+
+  - type: input
+    id: version
+    attributes:
+      label: 版本
+      description: 插件版本或提交 SHA
+      placeholder: v0.1.0 / 87ad57e
+    validations:
+      required: true
+
+  - type: dropdown
+    id: os
+    attributes:
+      label: 操作系统
+      options:
+        - Windows
+        - macOS
+        - Linux
+    validations:
+      required: true
+
+  - type: dropdown
+    id: edge
+    attributes:
+      label: Microsoft Edge 是否可用
+      description: 影响「薄页渲染兜底」路径
+      options:
+        - 已安装
+        - 未安装
+        - 不确定
+    validations:
+      required: true
+
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: 发生了什么
+      description: 期望结果与实际结果
+    validations:
+      required: true
+
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: 复现步骤
+      description: 若涉及检索/抓取，请附目标 URL 与调用参数（query、engine、mode）
+      placeholder: |
+        1. 打开「联网搜索」开关
+        2. web_access_fetch({ url: "https://..." })
+        3. 实际返回 ...
+    validations:
+      required: true
+
+  - type: textarea
+    id: output
+    attributes:
+      label: 工具返回原文 / 报错
+      description: 请粘贴完整返回文本（可脱敏），不要只贴截图
+      render: text
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: 已确认
+      options:
+        - label: 已升级到最新 main 分支或用最新提交复现
+          required: false
+        - label: 这不是站点反爬导致的行为（或无法区分）
+          required: false
