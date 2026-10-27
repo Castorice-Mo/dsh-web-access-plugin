@@ -1,6 +1,6 @@
 {
-  "name": "dsh-web-access",
-  "version": "0.1.0",
+  "name": "@castorice-mo/dsh-web-access",
+  "version": "0.1.1",
   "description": "Web access for DeepSeek Harness agents: Microsoft Edge rendering, search and page scraping, with a per-conversation 联网搜索 switch.",
   "license": "MIT",
   "author": "dsh-web-access contributors",

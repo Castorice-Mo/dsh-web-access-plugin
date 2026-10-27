@@ -5,8 +5,9 @@
 # 本文件不被 Harness 读取，也不声称属于任何官方清单。
 # 内容与 index.js / package.json 的真实实现一一对应。
 
-name: dsh-web-access
-version: 0.1.0
+package: "@castorice-mo/dsh-web-access"
+name: "@castorice-mo/dsh-web-access"
+version: 0.1.1
 license: MIT
 summary: >-
   Web search and page reading for agents, rendered through Microsoft Edge,

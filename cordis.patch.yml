@@ -3,7 +3,7 @@
 # The browser half loads from package.json `dsh.client`; it needs no row of its own.
 - insert:
     - id: dsh-web-access
-      name: dsh-web-access
+      name: '@castorice-mo/dsh-web-access'
       config:
         # Empty means "use the defaults compiled into index.js".
         # Override here, for example:

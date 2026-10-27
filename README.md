@@ -67,15 +67,17 @@ Harness 默认的联网工具（`web_search` / `web_fetch`）有两个实际痛�
 安装成功后返回 `application: "applied"`，profile 的 `package.json` 里会出现一条链接依赖：
 
 ```
-+ dsh-web-access 0.1.0 <- E:\path\to\web-access
++ @castorice-mo/dsh-web-access 0.1.1 <- E:\path\to\web-access
 ```
+
+> **包名说明**：npm 上的 `dsh-web-access` 已被他人占用（v0.2.4），因此本包的正式名称为带 scope 的 `@castorice-mo/dsh-web-access`。仓库名 `dsh-web-access-plugin` 不受影响。
 
 **装完请刷新页面**：浏览器半部（开关按钮）一定需要重新拉取客户端 bundle。修改过 Host 代码后，若工具没有出现或行为仍是旧的，请**重启 Harness** —— 仅靠热更新不保证 Host 半部换到新一代模块（本机实测：改完 `index.js` 后仍在跑旧一代字符串）。
 
 ### 卸载
 
 ```jsonc
-{ "action": "remove_bundle", "target": "dsh-web-access" }
+{ "action": "remove_bundle", "target": "@castorice-mo/dsh-web-access" }
 ```
 
 ### 启用 / 停用
@@ -83,6 +85,8 @@ Harness 默认的联网工具（`web_search` / `web_fetch`）有两个实际痛�
 ```jsonc
 { "action": "set_plugin", "target": "dsh-web-access", "enabled": false }
 ```
+
+> `set_plugin` 用的是 Loader 行 id（`dsh-web-access`），`remove_bundle` 用的是包名（带 scope），两者不同。
 
 ---
 

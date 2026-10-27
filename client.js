@@ -1,5 +1,7 @@
 window.__ModuleLoader__.load({
-  id: 'dsh-web-access',
+  // 模块 id 必须与 package.json 的包名完全一致（含 scope）；否则宿主的客户端
+  // 模块图找不到这一行，浏览器半部（开关按钮）不会加载。
+  id: '@castorice-mo/dsh-web-access',
   factory(require) {
     const React = require('react')
     const h = React.createElement

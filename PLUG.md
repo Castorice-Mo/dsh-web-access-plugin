@@ -9,8 +9,8 @@
 
 | 项 | 值 | 出处 |
 |---|---|---|
-| 包名 | `dsh-web-access` | `package.json` |
-| 版本 | `0.1.0` | `package.json` |
+| 包名 | `@castorice-mo/dsh-web-access`（npm scope；`dsh-web-access` 已被他人占用） | `package.json` |
+| 版本 | `0.1.1` | `package.json` |
 | 许可 | MIT | `LICENSE`、`package.json` |
 | 形态 | Harness **bundle**，一包两半（Host + Client） | `package.json` 的 `dsh` 字段 |
 | 第三方依赖 | **无** | `dependencies` 不存在；代码只 `import` `node:` 内置模块与相对路径 |
@@ -25,8 +25,8 @@
 Host 导出：`export function apply(ctx, config)` 与 `export const inject = ['tools', 'systemPrompt']`。
 `webServer` 通过 `ctx.inject(['webServer'], …)` 动态等待，因此无 Web 载体的 profile 仍能激活工具。
 
-Client 导出：`window.__ModuleLoader__.load({ id: 'dsh-web-access', factory(require) { … } })`，
-返回 `{ inject: ['slots'], apply(ctx) }`。
+Client 导出：`window.__ModuleLoader__.load({ id: '@castorice-mo/dsh-web-access', factory(require) { … } })`，
+返回 `{ inject: ['slots'], apply(ctx) }`。模块 id 必须与包名完全一致，含 scope。
 
 ## 3. 模型可见面（工具）
 
