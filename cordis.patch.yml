@@ -1,0 +1,15 @@
+# dsh-web-access bundle patch.
+# One Host row: tools, session switch state, HTTP routes, guard and prompt context.
+# The browser half loads from package.json `dsh.client`; it needs no row of its own.
+- insert:
+    - id: dsh-web-access
+      name: dsh-web-access
+      config:
+        # Empty means "use the defaults compiled into index.js".
+        # Override here, for example:
+        #   searchEngine: bing        # bing | duckduckgo | edge | auto
+        #   requireToggle: true       # false = tools usable without the switch
+        #   maxResults: 8
+        #   fetchMaxChars: 20000
+        #   edgePath: 'C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe'
+        {}

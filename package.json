@@ -1,0 +1,47 @@
+{
+  "name": "dsh-web-access",
+  "version": "0.1.0",
+  "description": "Web access for DeepSeek Harness agents: Microsoft Edge rendering, search and page scraping, with a per-conversation 联网搜索 switch.",
+  "license": "MIT",
+  "author": "dsh-web-access contributors",
+  "type": "module",
+  "keywords": [
+    "dsh",
+    "deepseek-harness",
+    "plugin",
+    "bundle",
+    "web-search",
+    "microsoft-edge",
+    "scraping"
+  ],
+  "exports": {
+    ".": "./index.js",
+    "./client": "./client.js",
+    "./locale/*.json": "./locale/*.json",
+    "./icon": "./icon.svg"
+  },
+  "files": [
+    "index.js",
+    "client.js",
+    "lib",
+    "cordis.patch.yml",
+    "locale/*.json",
+    "icon.svg",
+    "PLUG.md",
+    "agents/openai.yaml",
+    "README.md",
+    "LICENSE"
+  ],
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "client": {
+      "platform": "web",
+      "immediately": true,
+      "inject": [
+        "@deepseek-ai/dsh-client-ui-conversation"
+      ]
+    }
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "meta": {
+    "title": "联网搜索",
+    "description": "让智能体通过 Microsoft Edge 全网检索并抓取网页正文，并在输入框下方提供「联网搜索」开关。"
+  },
+  "switch": {
+    "label": "联网搜索",
+    "on": "本会话联网搜索已开启",
+    "off": "本会话联网搜索已关闭",
+    "unavailable": "未找到 Microsoft Edge：搜索仍可用，网页渲染不可用",
+    "failed": "开关状态更新失败"
+  }
+}

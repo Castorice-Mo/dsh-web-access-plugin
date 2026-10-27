@@ -1,0 +1,17 @@
+# 统一行尾：仓库内与检出后都用 LF，避免 Windows 的 autocrlf 把文本变成 CRLF
+* text=auto eol=lf
+
+# 明确二进制资源
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.webp binary
+*.ico binary
+
+# 文档与配置强制按文本处理
+*.md text
+*.json text
+*.yml text
+*.yaml text
+*.js text
+*.svg text

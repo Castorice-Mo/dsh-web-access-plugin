@@ -1,0 +1,13 @@
+{
+  "meta": {
+    "title": "Web Access",
+    "description": "Lets the agent search the web and read pages through Microsoft Edge, and puts a per-conversation 联网搜索 switch under the composer."
+  },
+  "switch": {
+    "label": "Web search",
+    "on": "Web search on for this conversation",
+    "off": "Web search off for this conversation",
+    "unavailable": "Microsoft Edge was not found; search still works, rendering does not",
+    "failed": "Could not update the switch"
+  }
+}

@@ -1,0 +1,81 @@
+# agents/openai.yaml
+#
+# 供 OpenAI 兼容的 Agent 宿主识别本插件能力的描述文件。
+# 实际运行载体是 DeepSeek Harness 的 bundle 机制（见 PLUG.md 与 cordis.patch.yml）；
+# 本文件不被 Harness 读取，也不声称属于任何官方清单。
+# 内容与 index.js / package.json 的真实实现一一对应。
+
+name: dsh-web-access
+version: 0.1.0
+license: MIT
+summary: >-
+  Web search and page reading for agents, rendered through Microsoft Edge,
+  with a per-conversation switch in the composer tool row.
+
+runtime:
+  node: ">=20"
+  third_party_dependencies: []
+  network: required
+
+entrypoints:
+  host: index.js
+  client: client.js
+
+capabilities:
+  - id: web_search
+    tool: web_access_search
+    description: >-
+      Search the public web and return source URLs with title and snippet.
+      Engines are tried in order bing, edge, duckduckgo; results that do not
+      match the query terms are flagged lowConfidence instead of being
+      presented as evidence.
+    parameters:
+      - name: query
+        type: string
+        required: true
+      - name: max_results
+        type: integer
+        required: false
+        maximum: 30
+      - name: engine
+        type: string
+        required: false
+        enum: [auto, bing, duckduckgo, edge]
+
+  - id: web_fetch
+    tool: web_access_fetch
+    description: >-
+      Fetch one http(s) page and return its readable body text. Plain HTTP
+      first; headless Microsoft Edge re-renders pages whose HTTP body is too
+      thin (under 700 characters or fewer than 3 prose lines).
+    parameters:
+      - name: url
+        type: string
+        required: true
+      - name: mode
+        type: string
+        required: false
+        enum: [auto, http, edge]
+      - name: max_chars
+        type: integer
+        required: false
+        maximum: 200000
+
+session_state:
+  per_conversation: true
+  storage: host_process_memory
+  reset_on: [harness_restart, host_reload]
+  fail_closed: true
+
+ui:
+  slot: conversation.input.left
+  registration_id: dsh-web-access
+  order: 10
+  control: switch
+  label: 联网搜索
+
+requirements:
+  - id: toggle_on
+    description: Both tools are denied by a tool guard while the conversation switch is off.
+  - id: source_citation
+    description: Answers must cite the source URL as a markdown link at each used passage.
